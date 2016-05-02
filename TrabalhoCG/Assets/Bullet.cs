@@ -11,11 +11,11 @@ public class Bullet : MonoBehaviour
         if(shooter = other.gameObject.GetComponent<Shooter>())
         {
             shooter.TakeDamage(damage);
-            Destroy(this.gameObject);
         }
         else {
             Destroy(other.gameObject);
         }
-       
+
+        Destroy(this.gameObject);
     }
 }
