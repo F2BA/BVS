@@ -37,7 +37,7 @@
 		Lighting On
 		Cull Off
 		SetTexture[_BumpMap]{
-		constantColor(.3,.3,.3)
+		constantColor(.4,.4,.4)
 		combine constant lerp(texture) previous
 	}
 		SetTexture[_MainTex]{

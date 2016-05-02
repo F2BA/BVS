@@ -13,7 +13,7 @@ public class Bullet : MonoBehaviour
             shooter.TakeDamage(damage);
         }
         else {
-            Destroy(other.gameObject);
+            if (!other.gameObject.CompareTag("IgnoreCollision")) Destroy(other.gameObject);
         }
 
         Destroy(this.gameObject);

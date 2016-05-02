@@ -18,6 +18,10 @@ public class Shooter : MonoBehaviour
     public float bulletSpeed;
     public KeyCode shootKey;
 
+    public GameObject bomb;
+    public float bombSpeed;
+    public KeyCode bombKey;
+
     // Use this for initialization
     void Start()
     {
@@ -49,6 +53,16 @@ public class Shooter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(Input.GetKeyUp(bombKey) && playerNumber == 1)
+        {
+            GameObject instance = Instantiate(bomb, bulletRef.transform.position, bulletRef.transform.rotation) as GameObject;
+            Rigidbody bombRigidbody = instance.GetComponent<Rigidbody>();
+            if (bombRigidbody != null)
+            {
+                bombRigidbody.AddForce((instance.transform.forward * bombSpeed) + (instance.transform.up * bombSpeed));
+            }
+        }
+
         if (Input.GetKeyUp(shootKey))
         {
             GameObject instance = Instantiate(bullet, bulletRef.transform.position, bulletRef.transform.rotation) as GameObject;
