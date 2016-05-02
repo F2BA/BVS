@@ -3,9 +3,12 @@ using System.Collections;
 
 public class Shooter : MonoBehaviour
 {
+    public int playerNumber = 1;
+    private int screenStart;
+
     private int defeats = 0;
 
-    public int life;
+    private int life;
     public int maxLife;
     public Texture lifeTexture;
     private int lifeboxSize;
@@ -18,6 +21,7 @@ public class Shooter : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        life = maxLife;
         lifeboxSize = 625;
     }
 
@@ -37,8 +41,9 @@ public class Shooter : MonoBehaviour
 
     void OnGUI()
     {
-        GUI.Box(new Rect(25, 25, lifeboxSize, 30), lifeTexture);
-        GUI.Label(new Rect(25, 70, 100, 30), "Defeats: "+defeats);
+        screenStart = (Screen.width / 2) * (playerNumber - 1);
+        GUI.Box(new Rect(screenStart + 25, 25, lifeboxSize, 30), lifeTexture);
+        GUI.Label(new Rect(screenStart + 25, 70, 100, 30), "Defeats: "+defeats);
     }
 
     // Update is called once per frame
@@ -50,7 +55,8 @@ public class Shooter : MonoBehaviour
             Rigidbody bulletRigidbody = instance.GetComponent<Rigidbody>();
             if (bulletRigidbody != null)
             {
-                bulletRigidbody.AddForce(instance.transform.forward * bulletSpeed);
+                if(playerNumber == 1) bulletRigidbody.AddForce(instance.transform.forward * bulletSpeed);
+                else if (playerNumber == 2) bulletRigidbody.AddForce(instance.transform.up * bulletSpeed);
             }
         }
 
