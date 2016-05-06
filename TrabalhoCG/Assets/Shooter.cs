@@ -5,6 +5,7 @@ public class Shooter : MonoBehaviour
 {
     public int playerNumber = 1;
     private int screenStart;
+    public GameObject playerStartPos;
 
     private int defeats = 0;
 
@@ -22,6 +23,8 @@ public class Shooter : MonoBehaviour
     public float bombSpeed;
     public KeyCode bombKey;
 
+    public GameObject explosion;
+
     // Use this for initialization
     void Start()
     {
@@ -36,6 +39,8 @@ public class Shooter : MonoBehaviour
             defeats = defeats + 1;
             //TODO: colocar efeito de explosão e eventualmente resetar o jogo para as posições iniciais
             life = maxLife;
+            GameObject instance = Instantiate(explosion, transform.position, transform.rotation) as GameObject;
+            this.gameObject.transform.position = playerStartPos.transform.position;
         }
         else {
             life = life - damage;
